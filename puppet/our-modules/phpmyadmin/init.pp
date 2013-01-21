@@ -1,4 +1,4 @@
-class phpmyadmin {
+class phpmyadmin ($server='apache') {
   include php
 
   package { 'phpmyadmin':
