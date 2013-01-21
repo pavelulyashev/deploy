@@ -1,3 +1,3 @@
 package { 'nginx':
-  ensure => installed;
+  ensure => latest;
 }  
