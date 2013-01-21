@@ -23,5 +23,5 @@ sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/epel.repo
 
 #################            Firewall configuration           #################
 # Add this to /etc/sysconfig/iptables
-# -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+sed -i '10a-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT' /etc/sysconfig/iptables
 ###############################################################################
