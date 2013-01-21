@@ -1,8 +1,3 @@
 node default {
-  class: { 'test': }
-}
-
-
-class test {
-  include nginx
+  class: { 'nginx': }
 }
