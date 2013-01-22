@@ -10,3 +10,6 @@
 [submodule "puppet/modules/phpmyadmin"]
 	path = puppet/modules/phpmyadmin
 	url = git://github.com/justicel/puppet-phpmyadmin.git
+[submodule "puppet/modules/build"]
+	path = puppet/modules/build
+	url = git://github.com/jfqd/puppet-module-build.git
