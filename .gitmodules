@@ -13,3 +13,6 @@
 [submodule "puppet/modules/build"]
 	path = puppet/modules/build
 	url = git://github.com/jfqd/puppet-module-build.git
+[submodule "puppet/modules/stdlib"]
+	path = puppet/modules/stdlib
+	url = git://github.com/puppetlabs/puppetlabs-stdlib.git
