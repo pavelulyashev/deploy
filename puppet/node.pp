@@ -1,3 +1,7 @@
 node default {
-  class: { 'nginx': }
+  class { 'nginx':
+  }
+  
+  class { 'python':
+  }
 }

@@ -23,7 +23,7 @@ class python::tools::centos {
 
 	exec { 'install pip':
 		command => 'easy_install-2.7 pip',
-		# creates => '...';
+		creates => '/usr/local/bin/pip';
 	}
 }
 
@@ -50,7 +50,7 @@ class centos::python27 {
 		source => 'http://python-distribute.org/distribute_setup.py';
 	}
 	exec { 'distribute':
-		command => 'python2.7 /tmp/distribute_setup.py':
+		command => 'python2.7 /tmp/distribute_setup.py',
 		require => [File['/tmp/distribute_setup.py'],
 					Exec['install python2.7']]
 	}

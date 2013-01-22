@@ -11,7 +11,7 @@ class python::setuptools::debian {
 	}
 	
 	exec { 'install pip':
-		command => "easy_install pip":
+		command => "easy_install pip",
 		path => "/usr/local/bin:/usr/bin:/bin",
 		refreshonly => true,
 		require => Package["python-setuptools"],
