@@ -1,4 +1,4 @@
-yum install -y mysql-server mysql
+yum install -y mysql-server mysql mysql-devel
 
 chkconfig mysqld on
 service mysqld start
