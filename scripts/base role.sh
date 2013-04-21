@@ -7,7 +7,7 @@ yum install -y http://pkgs.repoforge.org/htop/htop-1.0.2-1.el6.rf.x86_64.rpm
 ###############################################################################
 
 #################            Adding Thumbtack repo            #################
-yum install -y http://puppeteer.thumbtack.lo/centos/thumbtack-release-0.1.1-1.noarch.rpm
+yum install -y http://repo.dev.thumbtack.net/centos/thumbtack-release-0.1.1-1.noarch.rpm
 yum install -y runit
 ###############################################################################
 
