@@ -39,7 +39,7 @@ source ./user_creation.sh
 [ $DEPLOY_DB == "postgresql" ] && source ./postgresql.sh
 
 echo_progress "Installing python"
-install_python
+install_python_tools
 
 echo_progress "Creating users"
 create_deploy_group $DEPLOY_GROUP $DEPLOY_DIR

@@ -5,7 +5,6 @@
 function create_deploy_group {
 	DEPLOY_GROUP=$1
 	DEPLOY_DIR=$2
-	DEPLOY_VIRTUALENVS="$DEPLOY_DIR/.envs/"
 
 	sudo groupadd $DEPLOY_GROUP
 
@@ -13,6 +12,7 @@ function create_deploy_group {
 	sudo chgrp $DEPLOY_GROUP -R $DEPLOY_DIR
 	sudo chmod g+sw -R $DEPLOY_GROUP
 
+	DEPLOY_VIRTUALENVS="$DEPLOY_DIR/.envs/"
 	sudo mkdir $DEPLOY_VIRTUALENVS
 }
 
