@@ -1,0 +1,18 @@
+#
+# Default settings
+#
+
+DEPLOY_WEBSERVER="nginx"
+DEPLOY_POSSIBLE_WEBSERVERS="nginx apache"
+
+DEPLOY_DB="mysql"
+DEPLOY_POSSIBLE_DB="mysql postgresql"
+DEPLOY_DB_WEB_INTERFACE=1
+
+DEPLOY_GROUP="deploy"
+DEPLOY_USER="deployee"
+
+DEPLOY_USE_JENKINS=1
+DEPLOY_JENKINS_USER="jenkins"
+DEPLOY_DIR="/opt/deploy"
+DEPLOY_VIRTUALENVS="$DEPLOY_VIRTUALENVS/.envs/"
