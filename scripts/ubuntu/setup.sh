@@ -35,9 +35,6 @@ fi
 source ./python.sh
 source ./user_creation.sh
 
-[ $DEPLOY_DB == "mysql" ] && source ./mysql.sh
-[ $DEPLOY_DB == "postgresql" ] && source ./postgresql.sh
-
 echo_progress "Installing python"
 install_python_tools
 

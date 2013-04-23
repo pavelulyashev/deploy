@@ -10,7 +10,8 @@ function create_deploy_group {
 
 	sudo mkdir $DEPLOY_DIR
 	sudo chgrp $DEPLOY_GROUP -R $DEPLOY_DIR
-	sudo chmod g+sw -R $DEPLOY_GROUP
+	sudo chmod g+s -R $DEPLOY_GROUP
+	sudo chmod g+w -R $DEPLOY_GROUP
 
 	DEPLOY_VIRTUALENVS="$DEPLOY_DIR/.envs/"
 	sudo mkdir $DEPLOY_VIRTUALENVS
