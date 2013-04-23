@@ -3,7 +3,7 @@ function install_mysql {
 
 	# prevent prompt for root password
 	export DEBIAN_FROMTEND=noninteractive
-	sudo apt-get install -y mysql-server mysql-client
+	sudo apt-get install -q -y mysql-server mysql-client
 	[ $INSTALL_WEB_INTERFACE == 1 ] && install_phpmyadmin
 }
 
