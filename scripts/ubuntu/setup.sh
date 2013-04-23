@@ -1,4 +1,5 @@
-#
+#! /bin/bash
+
 # Base script for sutting up following stack of technologies:
 # python, easy_install, pip, virtualenv, virtualenvwrapper
 # nginx
