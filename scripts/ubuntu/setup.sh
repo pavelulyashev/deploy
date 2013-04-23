@@ -43,8 +43,8 @@ create_deploy_group $DEPLOY_GROUP $DEPLOY_DIR
 create_deploy_user $DEPLOY_USER $DEPLOY_GROUP
 [ $DEPLOY_USE_JENKINS ] && `create_deploy_user $DEPLOY_JENKINS_USER $DEPLOY_GROUP`
 
-# echo_progress "Installing database server"
-# source "./db_$DEPLOY_DB.sh" && eval "install_$DEPLOY_DB $DEPLOY_DB_WEB_INTERFACE"
+echo_progress "Installing database server"
+source "./db_$DEPLOY_DB.sh" && eval "install_$DEPLOY_DB $DEPLOY_DB_WEB_INTERFACE"
 
 echo_progress "Installing webserver"
 source "./webserver_$DEPLOY_WEBSERVER.sh" && eval "install_$DEPLOY_WEBSERVER"
