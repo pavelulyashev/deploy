@@ -26,6 +26,6 @@ function __add_virtualenv_to_bashrc {
 function create_deploy_user {
 	USER=$1
 	DEPLOY_GROUP=$2
-	sudo useradd $USER --create-home --groups $DEPLOY_GROUP --no-user-group && \
+	sudo useradd $USER --create-home --groups $DEPLOY_GROUP --no-user-group --shell /bin/bash && \
 	__add_virtualenv_to_bashrc $USER
 }
