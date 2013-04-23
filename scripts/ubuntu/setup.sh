@@ -39,12 +39,12 @@ source ./user_creation.sh
 [ $DEPLOY_DB == "postgresql" ] && source ./postgresql.sh
 
 echo_progress "Installing python"
-# install_python
+install_python
 
 echo_progress "Creating users"
-# create_deploy_group $DEPLOY_GROUP $DEPLOY_DIR
-# create_deploy_user $DEPLOY_USER $DEPLOY_GROUP
-# [ $DEPLOY_USE_JENKINS ] && `create_deploy_user $DEPLOY_JENKINS_USER $DEPLOY_GROUP`
+create_deploy_group $DEPLOY_GROUP $DEPLOY_DIR
+create_deploy_user $DEPLOY_USER $DEPLOY_GROUP
+[ $DEPLOY_USE_JENKINS ] && `create_deploy_user $DEPLOY_JENKINS_USER $DEPLOY_GROUP`
 
 # echo_progress "Installing database server"
 # source "./db_$DEPLOY_DB.sh" && eval "install_$DEPLOY_DB $DEPLOY_DB_WEB_INTERFACE"
