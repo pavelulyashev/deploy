@@ -20,12 +20,12 @@ function __add_virtualenv_to_bashrc {
 	BASHRC="/home/$1/.bashrc"
 	sudo echo "export WORKON_HOME=$DEPLOY_VIRTUALENVS" >> $BASHRC
 	sudo echo "export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`" >> $BASHRC
-	sudo echo "source `which virtualenvwrapper_lazy.sh`" >> $BASHRC 
+	sudo echo "source `which virtualenvwrapper_lazy.sh`" >> $BASHRC
 }
 
 function create_deploy_user {
 	USER=$1
 	DEPLOY_GROUP=$2
-	sudo useradd $USER --create-home --groups $DEPLOY_GROUP --no-user-group
+	sudo useradd $USER --create-home --groups $DEPLOY_GROUP --no-user-group && \
 	__add_virtualenv_to_bashrc $USER
 }
