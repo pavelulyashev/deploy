@@ -75,7 +75,7 @@ function __setup_gunicorn_config {
 	sudo mv /tmp/gunicorn_conf.py $PROJECT_SERVICE_DIR/gunicorn_conf.py
 
 	envsubst < $TEMPLATE_PROJECT_GUNICORN_RUN > /tmp/run
-	sudo mv /tmp/run > $PROJECT_SERVICE_DIR/run
+	sudo mv /tmp/run $PROJECT_SERVICE_DIR/run
 }
 
 export PROJECT_NAME=`read_project_name`
