@@ -26,7 +26,7 @@ function choose_project_port {
 	for PORT in 90{00..99}
 	do 
 		GREP_PORT=`echo $EXIST_CONFIG_FILES | grep _$PORT.conf`
-		if [ -n $GREP_PORT ]; then
+		if [ -z $GREP_PORT ]; then
 			echo $PORT
 			break
 		fi
