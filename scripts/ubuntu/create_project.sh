@@ -22,8 +22,7 @@ function read_project_name {
 }
 
 function choose_project_port {
-	NGINX_CONF_DIR=$1
-	EXIST_CONFIG_FILES=`ls $NGINX_CONF_DIR`
+	EXIST_CONFIG_FILES=`ls /etc/nginx/conf.d/`
 	for PORT in 90{00..99}
 	do 
 		GREP_PORT=`echo $EXIST_CONFIG_FILES | grep _$PORT.conf`
