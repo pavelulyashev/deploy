@@ -14,7 +14,7 @@ function read_project_name {
 		PROJECT_NAME=`read_value "Enter project name:"`
 		if [[ -d $DEPLOY_VIRTUALENVS/$PROJECT_NAME ]]; then
 			printf "Project \"$PROJECT_NAME\" already exists. "
-		elif [[ -z $PROJECT_NAME ]]; then
+		elif [[ -n $PROJECT_NAME ]]; then
 			echo $PROJECT_NAME
 			break
 		fi
