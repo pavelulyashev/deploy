@@ -48,14 +48,18 @@ function setup_project {
 
 	echo "export PROJECT_${PROJECT_NAME^^}=$PROJECT_PATH" >> $DEPLOY_BASHRC
 
-	sudo su $DEPLOY_USER
-	mkvirtualenv $PROJECT_NAME
-	exit
+	__setup_virtualenv
 
 	if [ $PROJECT_WEBSERVICE == "nginx+gunicorn" ]; then
 		echo_progress "Configuring nginx" &&  __setup_nginx_config
 		echo_progress "Configuring gunicorn" && __setup_gunicorn_config
 	fi
+}
+
+function __setup_virtualenv {
+	source $DEPLOY_BASHRC
+	mkvirtualenv $PROJECT_NAME
+	[ $PROJECT_WEBSERVICE == "nginx+gunicorn" ] && pip install gunicorn setproctitle
 }
 
 function __setup_nginx_config {
@@ -67,14 +71,9 @@ function __setup_gunicorn_config {
 	sudo mkdir -p $PROJECT_SERVICE_DIR
 	sudo envsubst < $TEMPLATE_PROJECT_GUNICORN_CONF > $PROJECT_SERVICE_DIR/gunicorn_conf.py
 	sudo envsubst < $TEMPLATE_PROJECT_GUNICORN_RUN > $PROJECT_SERVICE_DIR/run
-
-	sudo su $DEPLOY_USER
-	workon $PROJECT_NAME
-	pip install gunicorn setproctitle
-	exit
 }
 
 export PROJECT_NAME=`read_project_name`
-export PROJECT_WEBSERVICE=`select_value "How would you like to deploy your application" "$DEPLOY_POSSIBLE_NGINX_MODS"`
+export PROJECT_WEBSERVICE=`select_value "How would you like to deploy your application?" "$DEPLOY_POSSIBLE_NGINX_MODS"`
 
 setup_project
