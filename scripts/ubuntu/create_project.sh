@@ -42,13 +42,13 @@ function setup_project {
 	export PROJECT_NGINX_LOGS="$PROJECT_LOGS/nginx"
 	export PROJECT_WEBSERVICE_LOGS="$PROJECT_LOGS/$PROJECT_WEBSERVICE"
 
-	sudo mkdir -p $PROJECT_PATH
-	sudo mkdir -p $PROJECT_NGINX_LOGS
-	sudo mkdir -p $PROJECT_WEBSERVICE_LOGS
+	# sudo mkdir -p $PROJECT_PATH
+	# sudo mkdir -p $PROJECT_NGINX_LOGS
+	# sudo mkdir -p $PROJECT_WEBSERVICE_LOGS
 
-	echo "export PROJECT_${PROJECT_NAME^^}=$PROJECT_PATH" >> $DEPLOY_BASHRC
+	# echo "export PROJECT_${PROJECT_NAME^^}=$PROJECT_PATH" >> $DEPLOY_BASHRC
 
-	__setup_virtualenv
+	# echo_progress "Creating virtualenv" __setup_virtualenv
 
 	if [ $PROJECT_WEBSERVICE == "nginx+gunicorn" ]; then
 		echo_progress "Configuring nginx" &&  __setup_nginx_config
@@ -63,17 +63,22 @@ function __setup_virtualenv {
 }
 
 function __setup_nginx_config {
-	sudo envsubst < $TEMPLATE_PROJECT_NGINX_CONF > /etc/nginx/conf.d/${PROJECT_NAME}_$PROJECT_UPSTREAM_PORT.conf
+	envsubst < $TEMPLATE_PROJECT_NGINX_CONF > /tmp/nginx.conf
+	sudo mv /tmp/nginx.conf /etc/nginx/conf.d/${PROJECT_NAME}_$PROJECT_UPSTREAM_PORT.conf
 }
 
 function __setup_gunicorn_config {
 	PROJECT_SERVICE_DIR="/etc/service/$PROJECT_NAME"
 	sudo mkdir -p $PROJECT_SERVICE_DIR
-	sudo envsubst < $TEMPLATE_PROJECT_GUNICORN_CONF > $PROJECT_SERVICE_DIR/gunicorn_conf.py
-	sudo envsubst < $TEMPLATE_PROJECT_GUNICORN_RUN > $PROJECT_SERVICE_DIR/run
+	
+	envsubst < $TEMPLATE_PROJECT_GUNICORN_CONF > /tmp/gunicorn_conf.py
+	sudo mv /tmp/gunicorn_conf.py $PROJECT_SERVICE_DIR/gunicorn_conf.py
+
+	envsubst < $TEMPLATE_PROJECT_GUNICORN_RUN > /tmp/run
+	sudo mv /tmp/run > $PROJECT_SERVICE_DIR/run
 }
 
 export PROJECT_NAME=`read_project_name`
-export PROJECT_WEBSERVICE=`select_value "How would you like to deploy your application?" "$DEPLOY_POSSIBLE_NGINX_MODS"`
+export PROJECT_WEBSERVICE=`select_value "Which service would you like to use with nginx?" "$DEPLOY_POSSIBLE_NGINX_MODS"`
 
 setup_project

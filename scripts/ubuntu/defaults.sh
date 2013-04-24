@@ -19,7 +19,8 @@ export DEPLOY_LOGS="/var/logs/deploy"
 export DEPLOY_VIRTUALENVS="$DEPLOY_DIR/.envs/"
 export DEPLOY_BASHRC="$DEPLOY_DIR/.bashrc"
 
-export DEPLOY_POSSIBLE_NGINX_MODS="nginx+gunicorn nginx+uwsgi"
+export PROJECT_WEBSERVICE="gunicorn"
+export DEPLOY_POSSIBLE_NGINX_MODS="gunicorn nginx"
 # export DEPLOY_POSSIBLE_APACHE_MODS="apache+mod_wsgi"
 
 TEMPLATES_DIR=`pwd`/templates
