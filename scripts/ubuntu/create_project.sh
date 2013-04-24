@@ -42,15 +42,15 @@ function setup_project {
 	export PROJECT_NGINX_LOGS="$PROJECT_LOGS/nginx"
 	export PROJECT_WEBSERVICE_LOGS="$PROJECT_LOGS/$PROJECT_WEBSERVICE"
 
-	# sudo mkdir -p $PROJECT_PATH
-	# sudo mkdir -p $PROJECT_NGINX_LOGS
-	# sudo mkdir -p $PROJECT_WEBSERVICE_LOGS
+	sudo mkdir -p $PROJECT_PATH
+	sudo mkdir -p $PROJECT_NGINX_LOGS
+	sudo mkdir -p $PROJECT_WEBSERVICE_LOGS
 
-	# echo "export PROJECT_${PROJECT_NAME^^}=$PROJECT_PATH" >> $DEPLOY_BASHRC
+	echo "export PROJECT_${PROJECT_NAME^^}=$PROJECT_PATH" >> $DEPLOY_BASHRC
 
-	# echo_progress "Creating virtualenv" __setup_virtualenv
+	echo_progress "Creating virtualenv" __setup_virtualenv
 
-	if [ $PROJECT_WEBSERVICE == "nginx+gunicorn" ]; then
+	if [ $PROJECT_WEBSERVICE == "gunicorn" ]; then
 		echo_progress "Configuring nginx" &&  __setup_nginx_config
 		echo_progress "Configuring gunicorn" && __setup_gunicorn_config
 	fi
