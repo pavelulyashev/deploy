@@ -27,7 +27,7 @@ function choose_project_port {
 	for PORT in 90{00..99}
 	do 
 		GREP_PORT=`echo $EXIST_CONFIG_FILES | grep _$PORT.conf`
-		if [ -z $GREP_PORT ]; then
+		if [ -n $GREP_PORT ]; then
 			echo $PORT
 			break
 		fi
@@ -67,10 +67,6 @@ function __setup_gunicorn_config {
 	sudo su $DEPLOY_USER
 	workon $PROJECT_NAME
 	pip install gunicorn setproctitle
-}
-
-function __setup_uwsgi_config {
-
 }
 
 export PROJECT_NAME=`read_project_name`
