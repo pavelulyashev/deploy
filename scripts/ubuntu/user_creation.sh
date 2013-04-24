@@ -3,29 +3,35 @@
 #
 
 function create_deploy_group {
-	DEPLOY_GROUP=$1
-	DEPLOY_DIR=$2
-
 	sudo groupadd $DEPLOY_GROUP
+	__create_shared_folder $DEPLOY_DIR 
+	__create_shared_folder $DEPLOY_LOGS
+	[ ! -f $DEPLOY_BASHRC ] && __create_shared_bashrc
 
-	sudo mkdir $DEPLOY_DIR
-	sudo chgrp $DEPLOY_GROUP -R $DEPLOY_DIR
-	sudo chmod g+sw -R $DEPLOY_DIR
-
-	DEPLOY_VIRTUALENVS="$DEPLOY_DIR/.envs/"
 	sudo mkdir $DEPLOY_VIRTUALENVS
 }
 
-function __add_virtualenv_to_bashrc {
+function __create_shared_folder {
+	sudo mkdir $1
+	sudo chgrp $DEPLOY_GROUP -R $1
+	sudo chmod g+sw -R $1
+}
+
+function __create_shared_bashrc {
+	sudo touch $DEPLOY_BASHRC
+	sudo echo "umask 002" >> $DEPLOY_BASHRC
+	sudo echo "export WORKON_HOME=$DEPLOY_VIRTUALENVS" >> $DEPLOY_BASHRC
+	sudo echo "export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`" >> $DEPLOY_BASHRC
+	sudo echo "source `which virtualenvwrapper_lazy.sh`" >> $DEPLOY_BASHRC
+}
+
+function __source_shared_bashrc {
 	BASHRC="/home/$1/.bashrc"
-	sudo echo "export WORKON_HOME=$DEPLOY_VIRTUALENVS" >> $BASHRC
-	sudo echo "export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`" >> $BASHRC
-	sudo echo "source `which virtualenvwrapper_lazy.sh`" >> $BASHRC
+	sudo echo "[ -f $DEPLOY_BASHRC ] && source $DEPLOY_BASHRC" >> $BASHRC
 }
 
 function create_deploy_user {
 	USER=$1
-	DEPLOY_GROUP=$2
 	sudo useradd $USER --create-home --groups $DEPLOY_GROUP --no-user-group --shell /bin/bash && \
-	__add_virtualenv_to_bashrc $USER
+	__source_shared_bashrc $USER
 }
