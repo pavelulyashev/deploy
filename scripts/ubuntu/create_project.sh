@@ -14,7 +14,7 @@ function read_project_name {
 		PROJECT_NAME=`read_value "Enter project name:"`
 		if [[ -d $DEPLOY_VIRTUALENVS/$PROJECT_NAME ]]; then
 			printf "Project \"$PROJECT_NAME\" already exists. "
-		elif [[ -n $PROJECT_NAME ]]; then
+		elif [[ -z $PROJECT_NAME ]]; then
 			echo $PROJECT_NAME
 			break
 		fi
@@ -26,7 +26,7 @@ function choose_project_port {
 	for PORT in 90{00..99}
 	do 
 		GREP_PORT=`echo $EXIST_CONFIG_FILES | grep _$PORT.conf`
-		if [ -z $GREP_PORT ]; then
+		if [[ -z $GREP_PORT ]]; then
 			echo $PORT
 			break
 		fi
