@@ -1,3 +1,5 @@
+#! /bin/bash
+
 #
 # This script sets up environment for django project
 #
