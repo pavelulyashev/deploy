@@ -16,7 +16,7 @@ export DEPLOY_USE_JENKINS=1
 export DEPLOY_JENKINS_USER="jenkins"
 export DEPLOY_DIR="/opt/deploy"
 export DEPLOY_LOGS="/var/logs/deploy"
-export DEPLOY_VIRTUALENVS="$DEPLOY_DIR/.envs/"
+export DEPLOY_VIRTUALENVS="$DEPLOY_DIR/.envs"
 export DEPLOY_BASHRC="$DEPLOY_DIR/.bashrc"
 
 export PROJECT_WEBSERVICE="gunicorn"

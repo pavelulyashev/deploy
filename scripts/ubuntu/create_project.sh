@@ -48,7 +48,7 @@ function setup_project {
 
 	echo "export PROJECT_${PROJECT_NAME^^}=$PROJECT_PATH" >> $DEPLOY_BASHRC
 
-	echo_progress "Creating virtualenv" __setup_virtualenv
+	echo_progress "Creating virtualenv" && __setup_virtualenv
 
 	if [ $PROJECT_WEBSERVICE == "gunicorn" ]; then
 		echo_progress "Configuring nginx" &&  __setup_nginx_config
