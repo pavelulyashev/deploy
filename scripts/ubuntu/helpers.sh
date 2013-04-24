@@ -12,7 +12,7 @@ function read_boolean_value {
 PS3="Select number (default is 1): "
 
 function select_value {
-	printf -n "$1"
+	echo "$1" >&2
 	read -ra DEFAULT <<< "$2"
 	select REPLY in `echo $2`
 	do

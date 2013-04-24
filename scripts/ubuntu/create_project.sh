@@ -50,8 +50,12 @@ function setup_project {
 
 	sudo su $DEPLOY_USER
 	mkvirtualenv $PROJECT_NAME
+	exit
 
-	[ $PROJECT_WEBSERVICE == "nginx+gunicorn" ] && __setup_nginx_config && __setup_gunicorn_config
+	if [ $PROJECT_WEBSERVICE == "nginx+gunicorn" ]; then
+		echo_progress "Configuring nginx" &&  __setup_nginx_config
+		echo_progress "Configuring gunicorn" && __setup_gunicorn_config
+	fi
 }
 
 function __setup_nginx_config {
@@ -59,7 +63,7 @@ function __setup_nginx_config {
 }
 
 function __setup_gunicorn_config {
-	PROJECT_SERVICE_DIR="/etc/services/$PROJECT_NAME"
+	PROJECT_SERVICE_DIR="/etc/service/$PROJECT_NAME"
 	sudo mkdir -p $PROJECT_SERVICE_DIR
 	sudo envsubst < $TEMPLATE_PROJECT_GUNICORN_CONF > $PROJECT_SERVICE_DIR/gunicorn_conf.py
 	sudo envsubst < $TEMPLATE_PROJECT_GUNICORN_RUN > $PROJECT_SERVICE_DIR/run
@@ -67,6 +71,7 @@ function __setup_gunicorn_config {
 	sudo su $DEPLOY_USER
 	workon $PROJECT_NAME
 	pip install gunicorn setproctitle
+	exit
 }
 
 export PROJECT_NAME=`read_project_name`
