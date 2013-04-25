@@ -51,14 +51,14 @@ function setup_project {
 
 	if [ $PROJECT_WEBSERVICE == "gunicorn" ]; then
 		echo_progress "Configuring nginx" &&  __setup_nginx_config
-		echo_progress "Configuring gunicorn" && __setup_gunicorn_config
+		echo_progress "Configuring gunicorn" && __setup_gunicorn_config && __add_service_permissions
 	fi
 }
 
 function __setup_virtualenv {
 	source $DEPLOY_BASHRC
 	mkvirtualenv $PROJECT_NAME
-	[ $PROJECT_WEBSERVICE == "nginx+gunicorn" ] && pip install gunicorn setproctitle
+	[ $PROJECT_WEBSERVICE == "gunicorn" ] && pip install gunicorn setproctitle
 }
 
 function __setup_nginx_config {
@@ -75,6 +75,11 @@ function __setup_gunicorn_config {
 
 	envsubst < $TEMPLATE_PROJECT_GUNICORN_RUN > /tmp/run
 	sudo mv /tmp/run $PROJECT_SERVICE_DIR/run
+}
+
+function __add_service_permissions {
+	RESTART_COMMAND="%$DEPLOY_GROUP ALL=NOPASSWD:`which sv` restart $PROJECT_NAME"
+	sudo echo $RESTART_COMMAND >> /etc/sudoers
 }
 
 export PROJECT_NAME=`read_project_name`
