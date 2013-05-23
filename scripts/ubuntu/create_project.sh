@@ -59,6 +59,7 @@ function __setup_virtualenv {
 	source $DEPLOY_BASHRC
 	mkvirtualenv $PROJECT_NAME
 	[ $PROJECT_WEBSERVICE == "gunicorn" ] && pip install gunicorn setproctitle
+	easy_install -U distribute
 }
 
 function __setup_nginx_config {
